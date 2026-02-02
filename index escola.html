@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Escola Biblica</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+:root{
+    --rosa:#0d2a4d;          /* azul escuro principal */
+    --rosa-claro:#dbe7f5;   /* azul claro de fundo */
+    --cinza:#f2f4f8;        /* fundo geral claro */
+    --escuro:#1f2a37;       /* texto escuro */
+}
+
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:"Segoe UI",sans-serif;
+    background:var(--cinza);
+}
+
+header{
+    background:white;
+    box-shadow:0 2px 14px rgba(0,0,0,.08);
+    padding:10px 25px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo img{width:48px}
+
+.logo h2{
+    margin:0;
+    color:var(--rosa);
+}
+
+nav{
+    display:flex;
+    gap:10px;
+}
+
+nav button{
+    border:none;
+    background:transparent;
+    padding:10px 16px;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    color:var(--escuro);
+}
+
+nav button.active{
+    background:var(--rosa);
+    color:white;
+}
+
+.menu button{
+    width:100%;
+    padding:14px;
+    margin-bottom:10px;
+    border:none;
+    background:var(--cinza);
+    border-radius:10px;
+    font-size:15px;
+    cursor:pointer;
+    text-align:left;
+    font-weight:600;
+    color:var(--escuro);
+}
+
+.menu button.active{
+    background:var(--rosa);
+    color:white;
+}
+
+/* CONTEÚDO */
+main{
+    padding:30px;
+    max-width:1200px;
+    margin:auto;
+}
+
+.card{
+    background:white;
+    border-radius:16px;
+    padding:20px;
+    margin-bottom:25px;
+    box-shadow:0 8px 30px rgba(0,0,0,.06);
+}
+
+h2,h3{
+    color:var(--rosa);
+    margin-top:0;
+}
+
+/* FORMULÁRIOS */
+input,select,button{
+    width:100%;
+    padding:12px;
+    margin:6px 0;
+    font-size:15px;
+}
+
+button{
+    background:var(--rosa);
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+button.danger{background:#8a2d5f}
+button.print{background:#666}
+
+/* TABELA */
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+th,td{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+}
+
+th{
+    background:var(--rosa-claro);
+}
+
+/* RESUMO */
+.resumo{
+    background:var(--rosa-claro);
+    padding:12px;
+    border-radius:10px;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+/* IMPRESSÃO */
+@media print{
+    header,button{display:none}
+    main{padding:0}
+}
+
+/* ===== ANIMAÇÕES ===== */
+
+/* Transição suave geral */
+*{
+    transition: background .25s ease, 
+                color .25s ease, 
+                transform .25s ease, 
+                box-shadow .25s ease, 
+                opacity .25s ease;
+}
+
+/* Botões – efeito moderno */
+button{
+    position:relative;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+button:active{
+    transform:scale(.97);
+    box-shadow:0 4px 10px rgba(0,0,0,.2) inset;
+}
+
+/* Botões do menu */
+nav button{
+    overflow:hidden;
+}
+
+nav button::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(255,255,255,.15);
+    opacity:0;
+}
+
+nav button:hover::after{
+    opacity:1;
+}
+
+/* Cards com leve animação */
+.card{
+    animation:fadeUp .4s ease;
+}
+
+/* Animação base */
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Abas (telas) */
+.tela{
+    animation:fadeSlide .35s ease;
+}
+
+@keyframes fadeSlide{
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+tbody tr{
+    animation:fadeUp .3s ease;
+}
+
+
+@media (max-width:768px){
+    header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+
+    nav{
+        width:100%;
+        overflow-x:auto;
+        scrollbar-width:none;
+    }
+
+    nav::-webkit-scrollbar{
+        display:none;
+    }
+
+    nav button{
+        white-space:nowrap;
+        flex:0 0 auto;
+    }
+}
+
+@media (hover:none){
+    button:hover{
+        transform:none;
+        box-shadow:none;
+    }
+
+    button:active{
+        transform:scale(.96);
+        box-shadow:0 6px 14px rgba(0,0,0,.2);
+    }
+}
+
+@media (max-width:768px){
+    button, input, select{
+        min-height:44px; /* padrão recomendado mobile */
+    }
+}
+
+button{
+    background:linear-gradient(135deg,#0d2a4d,#163f73);
+}
+
+</style>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#b53b7a">
+
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <img src="https://i.imgur.com/jhcpRL2_d.webp?maxwidth=128&shape=square">
+        <h2>Secretaria</h2>
+    </div>
+
+    <nav class="menu">
+        <button class="active" onclick="abrir('arquivo',this)">📁 Arquivo</button>
+        <button onclick="abrir('cadastro',this)">👩 Cadastro</button>
+        <button onclick="abrir('chamada',this)">📋 Chamada</button>
+        <button onclick="abrir('relatorio',this)">📊 Relatório</button>
+    </nav>
+</header>
+
+<main>
+
+<div id="arquivo" class="tela">
+    <div class="card">
+        <h2>Arquivo de Dados</h2>
+        <button onclick="criarArquivo()">Criar arquivo JSON</button>
+        <button onclick="selecionarArquivo()">Selecionar arquivo JSON</button>
+    </div>
+</div>
+
+<div id="cadastro" class="tela" style="display:none">
+    <div class="card">
+        <h2>Cadastro de Irmãs</h2>
+        <button class="print" onclick="window.print()">🖨️ Imprimir</button>
+
+        <input id="pesquisaIrma" placeholder="Pesquisar irmã" oninput="renderIrmas()">
+        <input id="nome" placeholder="Nome completo">
+
+        <!-- ANIVERSÁRIO: USUÁRIO ESCOLHE NORMAL, SISTEMA IGNORA O ANO -->
+        <input id="aniversario" type="date">
+
+        <input id="telefone" placeholder="Telefone">
+
+        <select id="filtro" onchange="renderIrmas()">
+            <option value="alfabetico">Ordem alfabética</option>
+            <option value="aniversario">Aniversário mais próximo</option>
+        </select>
+
+        <button onclick="cadastrarIrma()">Cadastrar</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Aniversário</th>
+                    <th>P</th>
+                    <th>F</th>
+                    <th>Obs.</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="listaIrmas"></tbody>
+        </table>
+    </div>
+</div>
+
+<div id="chamada" class="tela" style="display:none">
+    <div class="card">
+        <h2>Chamada</h2>
+        <input type="date" id="dataChamada">
+        <button onclick="criarChamada()">Criar chamada</button>
+		
+		<button class="print" onclick="imprimirChamada()">🖨️ Imprimir chamada</button>
+
+        <select id="listaChamadas" onchange="abrirChamada()">
+            <option value="">Abrir chamada</option>
+        </select>
+		
+		<button class="danger" onclick="excluirChamada()">🗑️ Excluir chamada</button>
+
+        <div id="areaChamada"></div>
+    </div>
+</div>
+
+<div id="relatorio" class="tela" style="display:none">
+    <div class="card">
+        <h2>Relatório Mensal</h2>
+        <input type="month" id="mesRelatorio">
+        <button onclick="gerarRelatorio()">Gerar relatório</button>
+        <button class="print" onclick="window.print()">🖨️ Imprimir</button>
+        <div id="resultadoRelatorio"></div>
+    </div>
+</div>
+
+</main>
+
+<script>
+
+let dados={irmas:[],chamadas:{}},fileHandle=null;
+
+function dataBR(data){
+    if(!data) return "";
+    const [ano, mes, dia] = data.split("-");
+    return `${dia}/${mes}/${ano}`;
+}
+
+
+function salvarLocal(){
+    localStorage.setItem("filhasDaGraca_dados", JSON.stringify(dados));
+}
+
+function carregarLocal(){
+    const salvo = localStorage.getItem("filhasDaGraca_dados");
+    if(salvo){
+        dados = JSON.parse(salvo);
+        renderTudo();
+        recalcularTotais();
+    }
+}
+
+function abrir(id,btn){
+    document.querySelectorAll('.tela').forEach(t=>{
+        t.style.display='none';
+        t.style.opacity=0;
+    });
+
+    document.querySelectorAll('.menu button')
+        .forEach(b=>b.classList.remove('active'));
+
+    const tela = document.getElementById(id);
+    tela.style.display='block';
+
+    requestAnimationFrame(()=>{
+        tela.style.opacity=1;
+    });
+
+    btn.classList.add('active');
+}
+
+function gerarId(){
+    return Math.random().toString(36).substr(2,9);
+}
+
+/* ===== ARQUIVO ===== */
+async function criarArquivo(){
+    fileHandle = await window.showSaveFilePicker({
+        types:[{description:"JSON",accept:{"application/json":[".json"]}}]
+    });
+    salvar();
+}
+
+async function selecionarArquivo(){
+    [fileHandle] = await window.showOpenFilePicker({
+        types:[{description:"JSON",accept:{"application/json":[".json"]}}]
+    });
+    const file = await fileHandle.getFile();
+    dados = JSON.parse(await file.text());
+	salvarLocal();
+    recalcularTotais();
+    renderTudo();
+}
+
+async function salvar(){
+    salvarLocal(); // <-- ADICIONE ESTA LINHA
+    if(!fileHandle)return;
+    const w = await fileHandle.createWritable();
+    await w.write(JSON.stringify(dados,null,2));
+    await w.close();
+}
+
+
+/* ===== CADASTRO ===== */
+function cadastrarIrma(){
+    if(!nome.value)return;
+
+    let data = "";
+    if(aniversario.value){
+        // força ano fixo para não interferir no sistema
+        data = "2000-" + aniversario.value.slice(5);
+    }
+
+    dados.irmas.push({
+        id:gerarId(),
+        nome:nome.value,
+        aniversario:data,
+        telefone:telefone.value,
+        presencas:0,
+        faltas:0,
+        observacao:""
+    });
+
+    nome.value = aniversario.value = telefone.value = "";
+    renderIrmas();
+    salvar();
+}
+
+function diasParaAniversario(data){
+    if(!data)return null;
+    const hoje=new Date();
+    const [ano,mes,dia]=data.split("-");
+    let prox=new Date(hoje.getFullYear(),mes-1,dia);
+    if(prox<hoje)prox=new Date(hoje.getFullYear()+1,mes-1,dia);
+    return Math.ceil((prox-hoje)/(1000*60*60*24));
+}
+
+function renderIrmas(){
+    listaIrmas.innerHTML="";
+    let irmas=[...dados.irmas];
+    const termo=pesquisaIrma.value.toLowerCase();
+    const filtro=document.getElementById("filtro").value;
+
+    if(termo) irmas=irmas.filter(i=>i.nome.toLowerCase().includes(termo));
+
+    if(filtro==="alfabetico")
+        irmas.sort((a,b)=>a.nome.localeCompare(b.nome));
+
+    if(filtro==="aniversario")
+        irmas.sort((a,b)=>
+            (diasParaAniversario(a.aniversario)??9999) -
+            (diasParaAniversario(b.aniversario)??9999)
+        );
+
+    irmas.forEach(i=>{
+        const dias=diasParaAniversario(i.aniversario);
+        let texto="";
+        if(dias!==null){
+            if(dias===0) texto="🎉 Hoje!";
+            else texto=`🎂 Faltam ${dias} dias`;
+        }
+
+        listaIrmas.innerHTML+=`
+        <tr>
+            <td>${i.nome}</td>
+            <td>
+                ${i.aniversario ? dataBR(i.aniversario).slice(0,5) : ""}
+                <div style="font-size:13px;color:#8a2d5f">${texto}</div>
+            </td>
+            <td>${i.presencas}</td>
+            <td>${i.faltas}</td>
+            <td>
+                <input value="${i.observacao}" onchange="i.observacao=this.value;salvar()">
+            </td>
+            <td>
+                <button onclick="editarIrma('${i.id}')">Editar</button>
+                <button class="danger" onclick="excluirIrma('${i.id}')">Excluir</button>
+            </td>
+        </tr>`;
+    });
+}
+
+function editarIrma(id){
+    const i=dados.irmas.find(x=>x.id===id);
+    if(!i)return;
+    i.nome=prompt("Nome:",i.nome)||i.nome;
+    salvar();
+    renderIrmas();
+}
+
+function excluirIrma(id){
+    if(!confirm("Excluir irmã?"))return;
+    dados.irmas=dados.irmas.filter(i=>i.id!==id);
+    salvar();
+    renderIrmas();
+}
+
+/* ===== CHAMADAS ===== */
+function criarChamada(){
+    const d=dataChamada.value;
+    if(!d)return;
+    dados.chamadas[d]={
+        lista:dados.irmas.map(i=>({
+            nome:i.nome,
+            irmaId:i.id,
+            status:null
+        }))
+    };
+    salvar();
+    atualizarChamadas();
+    renderChamada(d);
+}
+
+function atualizarChamadas(){
+    listaChamadas.innerHTML=`<option value="">Abrir chamada</option>`;
+    Object.keys(dados.chamadas).forEach(d=>{
+        listaChamadas.innerHTML+=`<option value="${d}">${dataBR(d)}</option>`;
+    });
+}
+
+function abrirChamada(){
+    if(listaChamadas.value) renderChamada(listaChamadas.value);
+}
+
+function excluirChamada(){
+    const d = listaChamadas.value;
+    if(!d) return alert("Selecione uma chamada para excluir.");
+
+    if(!confirm("Tem certeza que deseja excluir esta chamada?")) return;
+
+    delete dados.chamadas[d];
+
+    salvar();
+    atualizarChamadas();
+    areaChamada.innerHTML = "";
+    recalcularTotais();
+    renderIrmas();
+}
+
+function imprimirChamada(){
+    if(!listaChamadas.value){
+        alert("Selecione uma chamada para imprimir.");
+        return;
+    }
+    window.print();
+}
+
+
+function marcarStatus(d,idx,status){
+    dados.chamadas[d].lista[idx].status=status;
+    recalcularTotais();
+    salvar();
+    renderChamada(d);
+    renderIrmas();
+}
+
+function renderChamada(d){
+    const c=dados.chamadas[d];
+    let p=0,f=0;
+    let html=`<h3>${dataBR(d)}</h3><table><tr><th>Nome</th><th>Status</th></tr>`;
+    c.lista.forEach((i,idx)=>{
+        if(i.status==="presente")p++;
+        if(i.status==="falta")f++;
+        html+=`
+        <tr>
+            <td>${i.nome}</td>
+            <td>
+                <input type="checkbox" ${i.status==="presente"?"checked":""}
+                onchange="marcarStatus('${d}',${idx},'presente')"> Presente
+                <input type="checkbox" ${i.status==="falta"?"checked":""}
+                onchange="marcarStatus('${d}',${idx},'falta')"> Falta
+            </td>
+        </tr>`;
+    });
+    html+=`</table><div class="resumo">Presentes: ${p} | Faltas: ${f}</div>`;
+    areaChamada.innerHTML=html;
+}
+
+function recalcularTotais(){
+    dados.irmas.forEach(i=>i.presencas=i.faltas=0);
+    Object.values(dados.chamadas).forEach(c=>{
+        c.lista.forEach(l=>{
+            const i=dados.irmas.find(x=>x.id===l.irmaId);
+            if(!i)return;
+            if(l.status==="presente")i.presencas++;
+            if(l.status==="falta")i.faltas++;
+        });
+    });
+}
+
+/* ===== RELATÓRIO ===== */
+function gerarRelatorio(){
+    const mes=mesRelatorio.value;
+    if(!mes)return;
+
+    let chamadasMes=Object.entries(dados.chamadas)
+        .filter(([d])=>d.startsWith(mes));
+
+    let totalP=0,totalF=0;
+    let resumo={};
+    dados.irmas.forEach(i=>resumo[i.id]={nome:i.nome,p:0,f:0});
+
+    chamadasMes.forEach(([_,c])=>{
+        c.lista.forEach(l=>{
+            if(!resumo[l.irmaId])return;
+            if(l.status==="presente"){resumo[l.irmaId].p++;totalP++;}
+            if(l.status==="falta"){resumo[l.irmaId].f++;totalF++;}
+        });
+    });
+
+    let html=`<div class="resumo">
+        Reuniões: ${chamadasMes.length}<br>
+        Presenças: ${totalP}<br>
+        Faltas: ${totalF}
+    </div>
+    <table><tr><th>Nome</th><th>Presenças</th><th>Faltas</th><th>%</th></tr>`;
+
+    Object.values(resumo).forEach(i=>{
+        let t=i.p+i.f;
+        let perc=t?((i.p/t)*100).toFixed(1):0;
+        html+=`<tr><td>${i.nome}</td><td>${i.p}</td><td>${i.f}</td><td>${perc}%</td></tr>`;
+    });
+
+    html+="</table>";
+    resultadoRelatorio.innerHTML=html;
+}
+
+function renderTudo(){
+    renderIrmas();
+    atualizarChamadas();
+}
+
+window.addEventListener("beforeunload", () => {
+    salvarLocal();
+});
+
+carregarLocal();
+
+
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+
+</body>
+</html>
